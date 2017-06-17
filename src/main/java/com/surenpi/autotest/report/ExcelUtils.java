@@ -17,14 +17,14 @@ import java.util.TreeMap;
  */
 public class ExcelUtils
 {
-    private static final String HEAD_MODULE_NAME = "用户";
-    private static final String HEAD_CLAZZ = "项目";
-    private static final String HEAD_METHOD = "金额";
-    private static final String HEAD_STATUS = "备注";
-    private static final String HEAD_BEGINE_TIME = "邮寄地址";
-    private static final String HEAD_END_TIME = "邮编";
-    private static final String HEAD_DETAIL = "联系人";
-    private static final String HEAD_MODULE_DESC = "联系人电话";
+    private static final String HEAD_MODULE_NAME = "模块名称";
+    private static final String HEAD_CLAZZ = "类名";
+    private static final String HEAD_METHOD = "方法名";
+    private static final String HEAD_STATUS = "状态";
+    private static final String HEAD_BEGINE_TIME = "开始时间";
+    private static final String HEAD_END_TIME = "结束时间";
+    private static final String HEAD_DETAIL = "详细信息";
+    private static final String HEAD_MODULE_DESC = "模块描述";
 
     private static final TreeMap<String, String> headerMap = new TreeMap<String, String>();
 
@@ -53,7 +53,7 @@ public class ExcelUtils
         headerMap.put(HEAD_STATUS, "status");
 
         workbook = new HSSFWorkbook();
-        sheet = workbook.createSheet("发票列表");
+        sheet = workbook.createSheet("测试报告明细");
     }
 
     /**
