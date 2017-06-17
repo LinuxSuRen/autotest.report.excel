@@ -6,6 +6,7 @@ import org.suren.autotest.web.framework.report.record.ExceptionRecord;
 import org.suren.autotest.web.framework.report.record.NormalRecord;
 import org.suren.autotest.web.framework.report.record.ProjectRecord;
 
+import javax.annotation.PreDestroy;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,22 +17,30 @@ import java.util.List;
 @Component
 public class ExcelReport implements RecordReportWriter
 {
-    private ExcelUtils utils = new ExcelUtils();
+    private ExcelUtils utils;
 
     @Override
-    public void write(ExceptionRecord record) {
+    public void write(ExceptionRecord record)
+    {
+        utils.export(record);
     }
 
     @Override
     public void write(NormalRecord normalRecord)
     {
-        List<Object> list = new ArrayList<Object>();
-        list.add(normalRecord);
-        utils.export(list, new File(normalRecord.getModuleName() + normalRecord.getMethodName() + ".xls"));
+        utils.export(normalRecord);
     }
 
     @Override
-    public void write(ProjectRecord projectRecord) {
+    public void write(ProjectRecord projectRecord)
+    {
+        utils = new ExcelUtils(
+                new File(projectRecord.getName() + "" + System.currentTimeMillis() + ".xls"));
+    }
 
+    @PreDestroy
+    public void saveFile()
+    {
+        utils.save();
     }
 }

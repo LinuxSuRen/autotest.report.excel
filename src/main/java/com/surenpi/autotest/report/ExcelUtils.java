@@ -15,7 +15,8 @@ import java.util.TreeMap;
 /**
  * @author suren
  */
-public class ExcelUtils {
+public class ExcelUtils
+{
     private static final String HEAD_MODULE_NAME = "用户";
     private static final String HEAD_CLAZZ = "项目";
     private static final String HEAD_METHOD = "金额";
@@ -27,7 +28,21 @@ public class ExcelUtils {
 
     private static final TreeMap<String, String> headerMap = new TreeMap<String, String>();
 
-    private void init() {
+    private File targetFile;
+
+    private FileOutputStream fos = null;
+    private HSSFWorkbook workbook;
+    private HSSFSheet sheet;
+
+    private int currentRow;
+
+    public ExcelUtils(File targetFile)
+    {
+        this.targetFile = targetFile;
+    }
+
+    private void init()
+    {
         headerMap.put(HEAD_MODULE_DESC, "moduleDescription");
         headerMap.put(HEAD_DETAIL, "project");
         headerMap.put(HEAD_END_TIME, "endTime");
@@ -36,35 +51,42 @@ public class ExcelUtils {
         headerMap.put(HEAD_CLAZZ, "clazzName");
         headerMap.put(HEAD_MODULE_NAME, "moduleName");
         headerMap.put(HEAD_STATUS, "status");
+
+        workbook = new HSSFWorkbook();
+        sheet = workbook.createSheet("发票列表");
     }
 
     /**
      * 将objList中的对象列表到导出到文件中
      *
      * @param objList 对象列表
-     * @param file 输出文件
      * @return 导出成功返回true
      */
-    public boolean export(List<Object> objList, File file) {
-        FileOutputStream fos = null;
+    public boolean export(List<Object> objList) {
         try {
-            fos = new FileOutputStream(file);
+            if(fos == null)
+            {
+                fos = new FileOutputStream(targetFile);
+            }
 
             return exportStream(objList, fos);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        } finally {
-            if(fos != null)
-            {
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
 
         return false;
+    }
+
+    /**
+     * 导出一条记录
+     * @param targetObj
+     * @return
+     */
+    public boolean export(Object targetObj)
+    {
+        List<Object> list = new ArrayList<Object>(1);
+
+        return export(list);
     }
 
     /**
@@ -75,9 +97,6 @@ public class ExcelUtils {
      * @return 导出成功返回true
      */
     public boolean exportStream(List<Object> objList, OutputStream outStream) {
-        HSSFWorkbook workbook = new HSSFWorkbook();
-        HSSFSheet sheet = workbook.createSheet("发票列表");
-
         init();
 
         createTitle(sheet);
@@ -85,7 +104,7 @@ public class ExcelUtils {
         if(objList != null)
         {
             int size = objList.size();
-            for(int i = 1; i < size + 1; i++) {
+            for(int i = currentRow; i < size + currentRow; i++, currentRow++) {
                 fillContent(sheet, i, objList.get(i - 1));
             }
         }
@@ -102,26 +121,12 @@ public class ExcelUtils {
     }
 
     /**
-     * 测试函数
-     *
-     * @param args
-     * @throws Exception
-     */
-    public static void main(String[] args) throws Exception {
-        ExcelUtils excelExport = new ExcelUtils();
-
-        List<Object> invoiceList = new ArrayList<Object>();
-
-        excelExport.export(invoiceList, new File("d:/test.xls"));
-    }
-
-    /**
      * 设置表头
      *
      * @param sheet
      */
     private void createTitle(HSSFSheet sheet) {
-        HSSFRow row = sheet.createRow(0);
+        HSSFRow row = sheet.createRow(currentRow++);
         int column = 0;
 
         for(String key : headerMap.keySet()) {
@@ -169,6 +174,18 @@ public class ExcelUtils {
                 e.printStackTrace();
             } finally {
                 column++;
+            }
+        }
+    }
+
+    public void save()
+    {
+        if(fos != null)
+        {
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }
