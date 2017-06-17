@@ -28,13 +28,13 @@ public class ExcelUtils {
     private static final TreeMap<String, String> headerMap = new TreeMap<String, String>();
 
     private void init() {
-        headerMap.put(HEAD_MODULE_DESC, "userName");
+        headerMap.put(HEAD_MODULE_DESC, "moduleDescription");
         headerMap.put(HEAD_DETAIL, "project");
-        headerMap.put(HEAD_END_TIME, "amount");
-        headerMap.put(HEAD_BEGINE_TIME, "comment");
-        headerMap.put(HEAD_METHOD, "postLocation");
-        headerMap.put(HEAD_CLAZZ, "postCode");
-        headerMap.put(HEAD_MODULE_NAME, "contacts");
+        headerMap.put(HEAD_END_TIME, "endTime");
+        headerMap.put(HEAD_BEGINE_TIME, "beginTime");
+        headerMap.put(HEAD_METHOD, "methodName");
+        headerMap.put(HEAD_CLAZZ, "clazzName");
+        headerMap.put(HEAD_MODULE_NAME, "moduleName");
         headerMap.put(HEAD_STATUS, "status");
     }
 

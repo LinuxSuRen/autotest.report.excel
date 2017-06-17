@@ -1,5 +1,6 @@
 package com.surenpi.autotest.report;
 
+import org.springframework.stereotype.Component;
 import org.suren.autotest.web.framework.report.RecordReportWriter;
 import org.suren.autotest.web.framework.report.record.ExceptionRecord;
 import org.suren.autotest.web.framework.report.record.NormalRecord;
@@ -12,6 +13,7 @@ import java.util.List;
 /**
  * @author suren
  */
+@Component
 public class ExcelReport implements RecordReportWriter
 {
     private ExcelUtils utils = new ExcelUtils();
