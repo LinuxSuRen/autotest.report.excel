@@ -43,14 +43,14 @@ public class ExcelUtils
 
     public void init()
     {
-        headerMap.put(HEAD_MODULE_DESC, "moduleDescription");
-        headerMap.put(HEAD_DETAIL, "project");
-        headerMap.put(HEAD_END_TIME, "endTime");
-        headerMap.put(HEAD_BEGINE_TIME, "beginTime");
-        headerMap.put(HEAD_METHOD, "methodName");
-        headerMap.put(HEAD_CLAZZ, "clazzName");
         headerMap.put(HEAD_MODULE_NAME, "moduleName");
+        headerMap.put(HEAD_MODULE_DESC, "moduleDescription");
+        headerMap.put(HEAD_CLAZZ, "clazzName");
+        headerMap.put(HEAD_METHOD, "methodName");
         headerMap.put(HEAD_STATUS, "status");
+        headerMap.put(HEAD_DETAIL, "project");
+        headerMap.put(HEAD_BEGINE_TIME, "beginTime");
+        headerMap.put(HEAD_END_TIME, "endTime");
 
         workbook = new HSSFWorkbook();
         sheet = workbook.createSheet("测试报告明细");
