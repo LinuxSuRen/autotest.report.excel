@@ -1,10 +1,9 @@
 package com.surenpi.autotest.report;
 
+import com.surenpi.autotest.report.record.ExceptionRecord;
+import com.surenpi.autotest.report.record.NormalRecord;
+import com.surenpi.autotest.report.record.ProjectRecord;
 import org.springframework.stereotype.Component;
-import org.suren.autotest.web.framework.report.RecordReportWriter;
-import org.suren.autotest.web.framework.report.record.ExceptionRecord;
-import org.suren.autotest.web.framework.report.record.NormalRecord;
-import org.suren.autotest.web.framework.report.record.ProjectRecord;
 
 import javax.annotation.PreDestroy;
 import java.io.File;
