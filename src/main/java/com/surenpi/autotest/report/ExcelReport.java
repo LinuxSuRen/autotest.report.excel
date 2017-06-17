@@ -36,6 +36,7 @@ public class ExcelReport implements RecordReportWriter
     {
         utils = new ExcelUtils(
                 new File(projectRecord.getName() + "" + System.currentTimeMillis() + ".xls"));
+        utils.init();
     }
 
     @PreDestroy

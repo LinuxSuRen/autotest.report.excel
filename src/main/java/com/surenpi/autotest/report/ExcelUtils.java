@@ -41,7 +41,7 @@ public class ExcelUtils
         this.targetFile = targetFile;
     }
 
-    private void init()
+    public void init()
     {
         headerMap.put(HEAD_MODULE_DESC, "moduleDescription");
         headerMap.put(HEAD_DETAIL, "project");
@@ -69,7 +69,7 @@ public class ExcelUtils
                 fos = new FileOutputStream(targetFile);
             }
 
-            return exportStream(objList, fos);
+            return exportStream(objList);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -85,6 +85,7 @@ public class ExcelUtils
     public boolean export(Object targetObj)
     {
         List<Object> list = new ArrayList<Object>(1);
+        list.add(targetObj);
 
         return export(list);
     }
@@ -93,28 +94,18 @@ public class ExcelUtils
      * 将objList中的对象列表到导出到输出流中
      *
      * @param objList 对象列表
-     * @param outStream 输出流
      * @return 导出成功返回true
      */
-    public boolean exportStream(List<Object> objList, OutputStream outStream) {
-        init();
-
+    public boolean exportStream(List<Object> objList) {
         createTitle(sheet);
 
         if(objList != null)
         {
             int size = objList.size();
-            for(int i = currentRow; i < size + currentRow; i++, currentRow++) {
-                fillContent(sheet, i, objList.get(i - 1));
+            int incr = size + currentRow;
+            for(int i = currentRow; i < incr; i++, currentRow++) {
+                fillContent(sheet, i, objList.get(i - currentRow));
             }
-        }
-
-        try {
-            workbook.write(outStream);
-
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
         }
 
         return false;
@@ -126,6 +117,11 @@ public class ExcelUtils
      * @param sheet
      */
     private void createTitle(HSSFSheet sheet) {
+        if(currentRow > 0)
+        {
+            return;
+        }
+
         HSSFRow row = sheet.createRow(currentRow++);
         int column = 0;
 
@@ -182,6 +178,12 @@ public class ExcelUtils
     {
         if(fos != null)
         {
+            try {
+                workbook.write(fos);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
             try {
                 fos.close();
             } catch (IOException e) {
