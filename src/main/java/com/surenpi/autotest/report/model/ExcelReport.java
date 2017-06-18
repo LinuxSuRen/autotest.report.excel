@@ -29,6 +29,7 @@ public class ExcelReport
     private String methodName;
     private String status;
     private String project;
+    private String totalTime;
     private String beginTime;
     private String endTime;
     private String detail;
@@ -91,6 +92,16 @@ public class ExcelReport
     public void setProject(String project)
     {
         this.project = project;
+    }
+
+    public String getTotalTime()
+    {
+        return totalTime;
+    }
+
+    public void setTotalTime(String totalTime)
+    {
+        this.totalTime = totalTime;
     }
 
     public String getBeginTime()
