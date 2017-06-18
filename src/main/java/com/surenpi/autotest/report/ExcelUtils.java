@@ -48,7 +48,7 @@ public class ExcelUtils
         headerMap.put(HEAD_CLAZZ, "clazzName");
         headerMap.put(HEAD_METHOD, "methodName");
         headerMap.put(HEAD_STATUS, "status");
-        headerMap.put(HEAD_DETAIL, "project");
+        headerMap.put(HEAD_DETAIL, "detail");
         headerMap.put(HEAD_BEGINE_TIME, "beginTime");
         headerMap.put(HEAD_END_TIME, "endTime");
 
