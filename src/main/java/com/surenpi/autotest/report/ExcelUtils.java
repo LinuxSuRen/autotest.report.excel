@@ -6,6 +6,7 @@ import org.apache.poi.hssf.util.HSSFColor;
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.math.BigInteger;
 import java.util.*;
 
 /**
@@ -205,6 +206,27 @@ public class ExcelUtils
                 column++;
             }
         }
+    }
+
+    /**
+     * 填写静态信息
+     * @param info
+     * @param sheetName
+     */
+    public void fillStaticInfo(Map<String, String> info, String sheetName)
+    {
+        HSSFSheet staticInfoSheet = workbook.createSheet(sheetName);
+        BigInteger rowNum = new BigInteger("0");
+        info.forEach((name, value) -> {
+            HSSFRow row = staticInfoSheet.createRow(rowNum.intValue());
+            rowNum.add(new BigInteger("1"));
+
+            HSSFCell nameCell = row.createCell(0);
+            HSSFCell valueCell = row.createCell(1);
+
+            nameCell.setCellValue(name);
+            valueCell.setCellValue(value);
+        });
     }
 
     public void save()

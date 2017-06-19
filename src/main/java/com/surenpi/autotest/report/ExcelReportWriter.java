@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PreDestroy;
 import java.io.File;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Excel格式报告导出
@@ -19,6 +21,7 @@ import java.io.File;
 public class ExcelReportWriter implements RecordReportWriter
 {
     private ExcelUtils utils;
+    private ProjectRecord projectRecord;
 
     @Override
     public void write(ExceptionRecord record)
@@ -28,9 +31,7 @@ public class ExcelReportWriter implements RecordReportWriter
         ModelMapper mapper = new ModelMapper();
         ExcelReport excelReport = mapper.map(normalRecord, ExcelReport.class);
         excelReport.setDetail(record.getStackTraceText());
-        excelReport.setStatus(ReportStatus.EXCEPTION.name());
-        excelReport.setBeginTime(DateUtils.getDateText(normalRecord.getBeginTime()));
-        excelReport.setEndTime(DateUtils.getDateText(normalRecord.getEndTime()));
+        fillReport(normalRecord, ReportStatus.EXCEPTION, excelReport);
 
         utils.export(excelReport);
     }
@@ -39,24 +40,47 @@ public class ExcelReportWriter implements RecordReportWriter
     public void write(NormalRecord normalRecord)
     {
         ExcelReport excelReport = new ModelMapper().map(normalRecord, ExcelReport.class);
-        excelReport.setStatus(ReportStatus.NORMAL.name());
-        excelReport.setBeginTime(DateUtils.getDateText(normalRecord.getBeginTime()));
-        excelReport.setEndTime(DateUtils.getDateText(normalRecord.getEndTime()));
+        fillReport(normalRecord, ReportStatus.NORMAL, excelReport);
 
         utils.export(excelReport);
+    }
+
+    /**
+     * 填充公共数据
+     * @param normalRecord
+     * @param reportStatus
+     * @param excelReport
+     */
+    private void fillReport(NormalRecord normalRecord, ReportStatus reportStatus, ExcelReport excelReport)
+    {
+        excelReport.setStatus(reportStatus.name());
+        excelReport.setBeginTime(DateUtils.getDateText(normalRecord.getBeginTime()));
+        excelReport.setEndTime(DateUtils.getDateText(normalRecord.getEndTime()));
+        excelReport.setTotalTime(((normalRecord.getEndTime() - normalRecord.getBeginTime()) / 1000) + "秒");
     }
 
     @Override
     public void write(ProjectRecord projectRecord)
     {
         utils = new ExcelUtils(
-                new File(projectRecord.getName() + "" + System.currentTimeMillis() + ".xls"));
+                new File(projectRecord.getName() + "-" + System.currentTimeMillis() + ".xls"));
         utils.init();
+        this.projectRecord = projectRecord;
     }
 
     @PreDestroy
     public void saveFile()
     {
+        Map<String,String> info = new LinkedHashMap<String, String>();
+        info.put("测试流程", projectRecord.getName());
+        info.put("IP", projectRecord.getAddressInfo());
+        info.put("操作系统", projectRecord.getOsName() + "-"
+                + projectRecord.getOsArch() + "-"
+                + projectRecord.getOsVersion());
+        info.put("项目地址", "https://github.com/LinuxSuRen/phoenix.webui.framework");
+        info.putAll(projectRecord.getUserInfo());
+
+        utils.fillStaticInfo(info, "环境信息");
         utils.save();
     }
 }
