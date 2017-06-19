@@ -78,7 +78,10 @@ public class ExcelReportWriter implements RecordReportWriter
                 + projectRecord.getOsArch() + "-"
                 + projectRecord.getOsVersion());
         info.put("项目地址", "https://github.com/LinuxSuRen/phoenix.webui.framework");
-        info.putAll(projectRecord.getUserInfo());
+        if(projectRecord.getUserInfo() != null)
+        {
+            info.putAll(projectRecord.getUserInfo());
+        }
 
         utils.fillStaticInfo(info, "环境信息");
         utils.save();
