@@ -1,9 +1,7 @@
 package com.surenpi.autotest.report;
 
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.hssf.util.HSSFColor;
 
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
@@ -170,6 +168,16 @@ public class ExcelUtils
                 {
                     HSSFCell cell = row.createCell(column);
                     cell.setCellValue(value.toString());
+
+                    if(value.toString().equals(ReportStatus.EXCEPTION.name()))
+                    {
+                        HSSFFont font = workbook.createFont();
+                        font.setColor(HSSFFont.COLOR_RED);
+
+                        HSSFCellStyle style = workbook.createCellStyle();
+                        style.setFont(font);
+                        cell.setCellStyle(style);
+                    }
                 }
             }
             catch (SecurityException e)
@@ -203,6 +211,15 @@ public class ExcelUtils
     {
         if(fos != null)
         {
+            sheet.autoSizeColumn(0);
+            sheet.autoSizeColumn(1);
+            sheet.autoSizeColumn(2);
+            sheet.autoSizeColumn(3);
+            sheet.autoSizeColumn(4);
+            sheet.autoSizeColumn(5);
+            sheet.autoSizeColumn(6);
+            sheet.autoSizeColumn(8);
+
             try
             {
                 workbook.write(fos);
