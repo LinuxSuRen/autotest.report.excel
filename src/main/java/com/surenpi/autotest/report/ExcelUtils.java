@@ -216,10 +216,10 @@ public class ExcelUtils
     public void fillStaticInfo(Map<String, String> info, String sheetName)
     {
         HSSFSheet staticInfoSheet = workbook.createSheet(sheetName);
-        BigInteger rowNum = new BigInteger("0");
         info.forEach((name, value) -> {
-            HSSFRow row = staticInfoSheet.createRow(rowNum.intValue());
-            rowNum.add(new BigInteger("1"));
+            int lastRowNum = staticInfoSheet.getLastRowNum();
+
+            HSSFRow row = staticInfoSheet.createRow(++lastRowNum);
 
             HSSFCell nameCell = row.createCell(0);
             HSSFCell valueCell = row.createCell(1);
