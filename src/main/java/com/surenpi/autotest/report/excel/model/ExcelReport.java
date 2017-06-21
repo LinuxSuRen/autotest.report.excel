@@ -16,7 +16,7 @@
  *
  */
 
-package com.surenpi.autotest.report.model;
+package com.surenpi.autotest.report.excel.model;
 
 /**
  * @author suren
