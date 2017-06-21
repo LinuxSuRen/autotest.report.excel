@@ -27,7 +27,6 @@ import com.surenpi.autotest.report.record.NormalRecord;
 import com.surenpi.autotest.report.record.ProjectRecord;
 import com.surenpi.autotest.report.util.DateUtils;
 import org.modelmapper.ModelMapper;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.PreDestroy;
 import java.io.File;
@@ -38,7 +37,6 @@ import java.util.Map;
  * Excel格式报告导出
  * @author suren
  */
-@Component
 public class ExcelReportWriter implements RecordReportWriter
 {
     private ExcelUtils utils;
