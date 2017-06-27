@@ -18,6 +18,14 @@
 
 package com.surenpi.autotest.report.excel.writer;
 
+import java.io.File;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import javax.annotation.PreDestroy;
+
+import org.modelmapper.ModelMapper;
+
 import com.surenpi.autotest.report.RecordReportWriter;
 import com.surenpi.autotest.report.ReportStatus;
 import com.surenpi.autotest.report.excel.model.ExcelReport;
@@ -26,12 +34,6 @@ import com.surenpi.autotest.report.record.ExceptionRecord;
 import com.surenpi.autotest.report.record.NormalRecord;
 import com.surenpi.autotest.report.record.ProjectRecord;
 import com.surenpi.autotest.report.util.DateUtils;
-import org.modelmapper.ModelMapper;
-
-import javax.annotation.PreDestroy;
-import java.io.File;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 /**
  * Excel格式报告导出

@@ -18,11 +18,15 @@
 
 package com.surenpi.autotest.report.excel.annotation;
 
-import com.surenpi.autotest.report.excel.writer.ExcelReportConfiguration;
-import org.springframework.context.annotation.ComponentScan;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
 import org.springframework.context.annotation.Import;
 
-import java.lang.annotation.*;
+import com.surenpi.autotest.report.excel.writer.ExcelReportConfiguration;
 
 /**
  * 使用该注解可以开启Excel的报表功能
