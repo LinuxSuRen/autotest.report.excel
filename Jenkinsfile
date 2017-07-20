@@ -36,6 +36,14 @@ node {
     }
   }
   
+  stage('Site') {
+    if(isUnix()){
+      sh "'${mvnHome}/bin/mvn' site"
+    }else{
+      bat(/"${mvnHome}\bin\mvn" site/)
+    }
+  }
+  
   stage('Package') {
     if(isUnix()){
       sh "'${mvnHome}/bin/mvn' package"
@@ -45,7 +53,12 @@ node {
   }
   
   stage('Archive ApiDocs') {
-    sh "tar czvf apidocs.tar.gz target/apidocs"
-    archiveArtifacts 'apidocs.tar.gz'
+    sh "tar -czvf target/apidocs.tar.gz -C target apidocs"
+    archiveArtifacts 'target/apidocs.tar.gz'
+  }
+  
+  stage('Archive Site') {
+    sh "tar -czvf target/site.tar.gz -C target site"
+    archiveArtifacts 'target/site.tar.gz'
   }
 }
