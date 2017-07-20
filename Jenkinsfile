@@ -59,9 +59,9 @@ node {
   
   stage('Deploy') {
     if(isUnix()){
-      sh "'${mvnHome}/bin/mvn' deploy -DsignSkip=false"
+      sh "'${mvnHome}/bin/mvn' deploy -DsignSkip=false -DdocSkip=false"
     }else{
-      bat(/"${mvnHome}\bin\mvn" deploy -DsignSkip=false/)
+      bat(/"${mvnHome}\bin\mvn" deploy -DsignSkip=false -DdocSkip=false/)
     }
   }
 }
