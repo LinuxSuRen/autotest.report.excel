@@ -28,6 +28,10 @@ node {
     }
   }
   
+  stage('Archive') {
+  	archiveArtifacts '*.jar'
+  }
+  
   stage('Deploy') {
     if(isUnix()){
       sh "'${mvnHome}/bin/mvn' deploy -DsignSkip=false -DdocSkip=false"
