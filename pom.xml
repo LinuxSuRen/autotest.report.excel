@@ -4,7 +4,7 @@
 	<groupId>com.surenpi.autotest</groupId>
 	<artifactId>autotest.report.excel</artifactId>
 	<version>1.0.0-20170618</version>
-	
+
 	<url>http://surenpi.com</url>
 	<name>autotest.report.excel</name>
 
@@ -34,30 +34,30 @@
 					<autoReleaseAfterClose>true</autoReleaseAfterClose>
 				</configuration>
 			</plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                 <version>2.16</version>
-                 <executions>
-                      <execution>
-                        <id>validate</id>
-                        <phase>validate</phase>
-                        <configuration>
-                             <configLocation>checkstyle.xml</configLocation>
-                             <encoding>UTF-8</encoding>
-                             <consoleOutput>true</consoleOutput>
-                             <failsOnError>true</failsOnError>
-                             <linkXRef>false</linkXRef>
-                        </configuration>
-                        <goals>
-                             <goal>check</goal>
-                        </goals>
-                      </execution>
-                 </executions>
-               </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>2.16</version>
+				<executions>
+					<execution>
+						<id>validate</id>
+						<phase>validate</phase>
+						<configuration>
+							<configLocation>checkstyle.xml</configLocation>
+							<encoding>UTF-8</encoding>
+							<consoleOutput>true</consoleOutput>
+							<failsOnError>true</failsOnError>
+							<linkXRef>false</linkXRef>
+						</configuration>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>com.surenpi.autotest</groupId>
