@@ -20,15 +20,31 @@ node {
     mvnHome = tool 'M3'
   }
   
-  stage('Build') {
+  stage('Clean') {
     if(isUnix()){
-      sh "'${mvnHome}/bin/mvn' clean package"
+      sh "'${mvnHome}/bin/mvn' clean"
     }else{
-      bat(/"${mvnHome}\bin\mvn" clean package/)
+      bat(/"${mvnHome}\bin\mvn" clean/)
+    }
+  }
+  
+  stage('JavaDoc') {
+    if(isUnix()){
+      sh "'${mvnHome}/bin/mvn' javadoc:jar -DdocSkip=false"
+    }else{
+      bat(/"${mvnHome}\bin\mvn" javadoc:jar -DdocSkip=false/)
+    }
+  }
+  
+  stage('Package') {
+    if(isUnix()){
+      sh "'${mvnHome}/bin/mvn' package"
+    }else{
+      bat(/"${mvnHome}\bin\mvn" package/)
     }
   }
   
   stage('Archive ApiDocs') {
-  	archiveArtifacts 'target/apidocs'
+    archiveArtifacts 'target/apidocs'
   }
 }
