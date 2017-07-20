@@ -45,6 +45,7 @@ node {
   }
   
   stage('Archive ApiDocs') {
-    archiveArtifacts 'target/apidocs/*'
+    sh "tar czvf apidocs.tar.gz target/apidocs"
+    archiveArtifacts 'apidocs.tar.gz'
   }
 }
