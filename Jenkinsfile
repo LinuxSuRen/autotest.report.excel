@@ -28,8 +28,8 @@ node {
     }
   }
   
-  stage('Archive') {
-  	archiveArtifacts 'target/*.jar'
+  stage('Archive ApiDocs') {
+  	archiveArtifacts 'target/apidocs'
   }
   
   stage('Deploy') {
