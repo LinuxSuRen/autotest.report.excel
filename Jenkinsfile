@@ -52,13 +52,16 @@ node {
     }
   }
   
-  stage('Archive ApiDocs') {
-    sh "tar -czvf target/apidocs.tar.gz -C target apidocs"
-    archiveArtifacts 'target/apidocs.tar.gz'
-  }
-  
   stage('Archive Site') {
     sh "tar -czvf target/site.tar.gz -C target site"
     archiveArtifacts 'target/site.tar.gz'
+  }
+  
+  stage('Deploy') {
+    if(isUnix()){
+      sh "'${mvnHome}/bin/mvn' deploy -DsignSkip=false"
+    }else{
+      bat(/"${mvnHome}\bin\mvn" deploy -DsignSkip=false/)
+    }
   }
 }
