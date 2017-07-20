@@ -45,6 +45,6 @@ node {
   }
   
   stage('Archive ApiDocs') {
-    archiveArtifacts 'target/apidocs'
+    archiveArtifacts 'target/apidocs/*'
   }
 }
