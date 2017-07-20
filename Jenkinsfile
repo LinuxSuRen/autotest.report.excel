@@ -29,7 +29,7 @@ node {
   }
   
   stage('Archive') {
-  	archiveArtifacts '*.jar'
+  	archiveArtifacts 'target/*.jar'
   }
   
   stage('Deploy') {
