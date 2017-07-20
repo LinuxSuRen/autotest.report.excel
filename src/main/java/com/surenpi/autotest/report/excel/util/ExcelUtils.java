@@ -68,6 +68,9 @@ public class ExcelUtils
         this.targetFile = targetFile;
     }
 
+    /**
+     * 初始化
+     */
     public void init()
     {
         headerMap.put(HEAD_MODULE_NAME, "moduleName");
@@ -111,8 +114,8 @@ public class ExcelUtils
 
     /**
      * 导出一条记录
-     * @param targetObj
-     * @return
+     * @param targetObj 目标对象
+     * @return 是否成功
      */
     public boolean export(Object targetObj)
     {
@@ -239,8 +242,8 @@ public class ExcelUtils
 
     /**
      * 填写静态信息
-     * @param info
-     * @param sheetName
+     * @param info 静态信息
+     * @param sheetName 名称
      */
     public void fillStaticInfo(Map<String, String> info, String sheetName)
     {
@@ -258,6 +261,9 @@ public class ExcelUtils
         });
     }
 
+    /**
+     * 保存结果
+     */
     public void save()
     {
         if(fos != null)

@@ -29,7 +29,10 @@ import com.surenpi.autotest.report.RecordReportWriter;
 @Configuration
 public class ExcelReportConfiguration
 {
-	@Bean
+    /**
+     * @return Excel输出类
+     */
+    @Bean
     public RecordReportWriter createWriter()
     {
         return new ExcelReportWriter();
