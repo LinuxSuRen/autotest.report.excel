@@ -31,12 +31,4 @@ node {
   stage('Archive ApiDocs') {
   	archiveArtifacts 'target/apidocs'
   }
-  
-  stage('Deploy') {
-    if(isUnix()){
-      sh "'${mvnHome}/bin/mvn' deploy -DsignSkip=false -DdocSkip=false"
-    }else{
-      bat(/"${mvnHome}\bin\mvn" deploy -DsignSkip=false -DdocSkip=false/)
-    }
-  }
 }
