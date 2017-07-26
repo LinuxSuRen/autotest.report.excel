@@ -85,4 +85,10 @@
 			<artifactId>modelmapper</artifactId>
 		</dependency>
 	</dependencies>
+	<scm>
+		<url>scm:git:https://github.com/LinuxSuRen/autotest.report.excel.git</url>
+		<connection>scm:git:https://github.com/LinuxSuRen/autotest.report.excel.git</connection>
+		<developerConnection>scm:git:https://github.com/LinuxSuRen/autotest.report.excel.git</developerConnection>
+		<tag>${project.version}</tag>
+	</scm>
 </project>
