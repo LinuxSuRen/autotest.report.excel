@@ -1,7 +1,7 @@
 pipeline {
   agent any
   triggers {
-    pollSCM('H/5 * * * *')
+    pollSCM('H/15 * * * *')
   }
   
   stages {
@@ -79,6 +79,5 @@ properties([
             daysToKeepStr: '7',
             numToKeepStr: '14'
         )
-    ),
-    pipelineTriggers([])
+    )
 ])
