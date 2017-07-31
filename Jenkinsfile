@@ -65,3 +65,20 @@ node {
     }
   }
 }
+
+properties([
+    [
+        $class: 'GithubProjectProperty',
+        displayName: 'autotest.report.excel',
+        projectUrlStr: 'https://github.com/LinuxSuRen/autotest.report.excel'
+    ],
+    buildDiscarder(
+        logRotator(
+            artifactDaysToKeepStr: '',
+            artifactNumToKeepStr: '',
+            daysToKeepStr: '7',
+            numToKeepStr: '14'
+        )
+    ),
+    pipelineTriggers([])
+])
