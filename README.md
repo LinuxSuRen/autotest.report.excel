@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/LinuxSuRen/autotest.report.excel.svg?branch=master)](https://travis-ci.org/LinuxSuRen/autotest.report.excel)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.surenpi.autotest/autotest.report.excel/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.surenpi.autotest/autotest.report.excel)
+
 # autotest.report.excel
 本项目是Excel格式的自动化测试报告。更加详细的内容请[点击这里](http://surenpi.com/2017/06/21/autotest_report/)。  
 
