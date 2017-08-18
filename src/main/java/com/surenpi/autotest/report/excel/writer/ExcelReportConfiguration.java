@@ -24,7 +24,7 @@ import org.springframework.context.annotation.Configuration;
 import com.surenpi.autotest.report.RecordReportWriter;
 
 /**
- * @author suren
+ * @author <a href="http://surenpi.com">suren</a>
  */
 @Configuration
 public class ExcelReportConfiguration

@@ -39,7 +39,8 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import com.surenpi.autotest.report.ReportStatus;
 
 /**
- * @author suren
+ * Excel操作工具类
+ * @author <a href="http://surenpi.com">suren</a>
  */
 public class ExcelUtils
 {

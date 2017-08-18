@@ -19,7 +19,8 @@
 package com.surenpi.autotest.report.excel.model;
 
 /**
- * @author suren
+ * Excel格式的测试报告模型
+ * @author <a href="http://surenpi.com">suren</a>
  */
 public class ExcelReport
 {

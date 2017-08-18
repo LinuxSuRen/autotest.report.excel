@@ -37,7 +37,7 @@ import com.surenpi.autotest.report.util.DateUtils;
 
 /**
  * Excel格式报告导出
- * @author suren
+ * @author <a href="http://surenpi.com">suren</a>
  */
 public class ExcelReportWriter implements RecordReportWriter
 {
