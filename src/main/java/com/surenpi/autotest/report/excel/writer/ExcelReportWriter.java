@@ -87,9 +87,10 @@ public class ExcelReportWriter implements RecordReportWriter, ReportStore
     {
         String reportFileName = projectRecord.getName() + "-" + System.currentTimeMillis() + ".xls";
         File excelFile = new File(reportRoot, reportFileName);
-        if(!excelFile.getParentFile().isDirectory())
+        File parentDir = excelFile.getParentFile();
+        if(parentDir != null && !parentDir.isDirectory())
         {
-            excelFile.getParentFile().mkdirs();
+            parentDir.mkdirs();
         }
         
         utils = new ExcelUtils(excelFile);
