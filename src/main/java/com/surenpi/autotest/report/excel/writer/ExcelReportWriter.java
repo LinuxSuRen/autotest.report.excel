@@ -28,6 +28,7 @@ import org.modelmapper.ModelMapper;
 
 import com.surenpi.autotest.report.RecordReportWriter;
 import com.surenpi.autotest.report.ReportStatus;
+import com.surenpi.autotest.report.ReportStore;
 import com.surenpi.autotest.report.excel.model.ExcelReport;
 import com.surenpi.autotest.report.excel.util.ExcelUtils;
 import com.surenpi.autotest.report.record.ExceptionRecord;
@@ -39,10 +40,11 @@ import com.surenpi.autotest.report.util.DateUtils;
  * Excel格式报告导出
  * @author <a href="http://surenpi.com">suren</a>
  */
-public class ExcelReportWriter implements RecordReportWriter
+public class ExcelReportWriter implements RecordReportWriter, ReportStore
 {
     private ExcelUtils utils;
     private ProjectRecord projectRecord;
+    private String reportRoot;
 
     @Override
     public void write(ExceptionRecord record)
@@ -83,8 +85,14 @@ public class ExcelReportWriter implements RecordReportWriter
     @Override
     public void write(ProjectRecord projectRecord)
     {
-        utils = new ExcelUtils(
-                new File(projectRecord.getName() + "-" + System.currentTimeMillis() + ".xls"));
+        String reportFileName = projectRecord.getName() + "-" + System.currentTimeMillis() + ".xls";
+        File excelFile = new File(reportRoot, reportFileName);
+        if(!excelFile.getParentFile().isDirectory())
+        {
+            excelFile.getParentFile().mkdirs();
+        }
+        
+        utils = new ExcelUtils(excelFile);
         utils.init();
         this.projectRecord = projectRecord;
     }
@@ -109,5 +117,11 @@ public class ExcelReportWriter implements RecordReportWriter
 
         utils.fillStaticInfo(info, "环境信息");
         utils.save();
+    }
+
+    @Override
+    public void setStoreRoot(String root)
+    {
+        this.reportRoot = root;
     }
 }
