@@ -1,28 +1,24 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.surenpi.autotest</groupId>
+
+	<parent>
+		<groupId>com.surenpi.autotest</groupId>
+		<artifactId>autotest.parent</artifactId>
+		<version>1.0.1-20170815-SNAPSHOT</version>
+	</parent>
+	
 	<artifactId>autotest.report.excel</artifactId>
 	<version>1.0.0-20170618</version>
 
 	<url>http://surenpi.com</url>
 	<name>autotest.report.excel</name>
 
-	<parent>
-		<groupId>com.surenpi.autotest</groupId>
-		<artifactId>autotest.parent</artifactId>
-		<version>1.0.1-20170618</version>
-	</parent>
-
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.sonatype.plugins</groupId>
@@ -56,13 +52,47 @@
 				</executions>
 			</plugin>
 		</plugins>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.apache.maven.plugins
+										</groupId>
+										<artifactId>
+											maven-checkstyle-plugin
+										</artifactId>
+										<versionRange>
+											[2.16,)
+										</versionRange>
+										<goals>
+											<goal>check</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 
 	<dependencies>
 		<dependency>
 			<groupId>com.surenpi.autotest</groupId>
 			<artifactId>autotest.report</artifactId>
-			<version>1.0.0-20170618</version>
 		</dependency>
 
 		<!-- excel -->
@@ -85,6 +115,7 @@
 			<artifactId>modelmapper</artifactId>
 		</dependency>
 	</dependencies>
+	
 	<scm>
 		<url>scm:git:https://github.com/LinuxSuRen/autotest.report.excel.git</url>
 		<connection>scm:git:https://github.com/LinuxSuRen/autotest.report.excel.git</connection>
