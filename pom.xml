@@ -9,7 +9,7 @@
 	</parent>
 	
 	<artifactId>autotest.report.excel</artifactId>
-	<version>1.0.0-20170819-SNAPSHOT</version>
+	<version>1.0.0-20170818-SNAPSHOT</version>
 
 	<url>http://surenpi.com</url>
 	<name>autotest.report.excel</name>
